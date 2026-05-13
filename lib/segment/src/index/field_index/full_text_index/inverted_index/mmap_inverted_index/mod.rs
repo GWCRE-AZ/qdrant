@@ -10,7 +10,9 @@ use common::mmap::{Advice, AdviceSetting, MmapSlice, create_and_ensure_length};
 use common::persisted_hashmap::{READ_ENTRY_OVERHEAD, UniversalHashMap, serialize_hashmap};
 use common::stored_bitslice::MmapBitSlice;
 use common::types::PointOffsetType;
-use common::universal_io::{MmapFile, OpenOptions, ReadRange, TypedStorage, UniversalRead, UserData};
+use common::universal_io::{
+    MmapFile, OpenOptions, ReadRange, TypedStorage, UniversalRead, UserData,
+};
 use types::ZerocopyPostingValue;
 use uio_postings::UniversalPostings;
 
@@ -655,8 +657,6 @@ fn read_point_to_tokens_count<S: UniversalRead>(
     point_id: PointOffsetType,
 ) -> Option<usize> {
     let byte_offset = u64::from(point_id).checked_mul(size_of::<usize>() as u64)?;
-    let cow = storage
-        .read::<Random>(ReadRange::one(byte_offset))
-        .ok()?;
+    let cow = storage.read::<Random>(ReadRange::one(byte_offset)).ok()?;
     cow.first().copied()
 }
