@@ -620,6 +620,10 @@ where
     // TODO(colbert): refactor `EncodedVectors` to support multi vector storage after quantization migration
     type EncodedQuery = Vec<QuantizedStorage::EncodedQuery>;
 
+    fn is_in_ram_or_mmap(&self) -> bool {
+        self.quantized_storage.is_in_ram_or_mmap()
+    }
+
     fn is_on_disk(&self) -> bool {
         self.quantized_storage.is_on_disk()
     }
