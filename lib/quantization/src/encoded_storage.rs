@@ -140,7 +140,7 @@ impl EncodedStorage for TestEncodedStorage {
         Ok(())
     }
 
-    fn is_in_ram_or_mmap(&self) -> bool {
+    fn is_in_ram_or_mmap() -> bool {
         true
     }
 
