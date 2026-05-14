@@ -30,7 +30,7 @@ pub trait EncodedStorage {
             .enumerate()
     }
 
-    fn is_in_ram_or_mmap(&self) -> bool;
+    fn is_in_ram_or_mmap() -> bool;
     fn is_on_disk(&self) -> bool;
 
     fn upsert_vector(

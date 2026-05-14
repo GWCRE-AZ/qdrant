@@ -44,7 +44,7 @@ where
     T: bytemuck::Pod,
     S: UniversalWrite + Send + 'static,
 {
-    pub fn storage_kind(&self) -> UniversalKind {
+    pub fn storage_kind() -> UniversalKind {
         S::kind()
     }
 

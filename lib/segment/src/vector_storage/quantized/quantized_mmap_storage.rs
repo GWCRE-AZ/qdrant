@@ -90,7 +90,7 @@ impl quantization::EncodedStorage for QuantizedMmapStorage {
         ))
     }
 
-    fn is_in_ram_or_mmap(&self) -> bool {
+    fn is_in_ram_or_mmap() -> bool {
         true
     }
 

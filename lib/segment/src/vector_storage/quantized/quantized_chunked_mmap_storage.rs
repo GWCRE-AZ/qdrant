@@ -66,8 +66,16 @@ impl quantization::EncodedStorage for QuantizedChunkedMmapStorage {
             .map_err(std::io::Error::other)
     }
 
-    fn is_in_ram_or_mmap(&self) -> bool {
-        match self.data.storage_kind() {
+    fn is_in_ram_or_mmap() -> bool {
+        type StorageType = ChunkedVectors<u8, MmapFile>;
+
+        // This should produce compilation error, if `QuantizedChunkedMmapStorage::data` type is changed,
+        // to ensure that we always use correct type for this check
+        fn _static_assert_storage_type(storage: QuantizedChunkedMmapStorage) {
+            let _: StorageType = storage.data;
+        }
+
+        match StorageType::storage_kind() {
             UniversalKind::Mmap => true,
             UniversalKind::IoUring => false,
             UniversalKind::DiskCache => false,

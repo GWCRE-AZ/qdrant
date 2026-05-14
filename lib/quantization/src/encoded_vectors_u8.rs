@@ -592,8 +592,8 @@ impl<TStorage: EncodedStorage> EncodedVectorsU8<TStorage> {
 impl<TStorage: EncodedStorage> EncodedVectors for EncodedVectorsU8<TStorage> {
     type EncodedQuery = EncodedQueryU8;
 
-    fn is_in_ram_or_mmap(&self) -> bool {
-        self.encoded_vectors.is_in_ram_or_mmap()
+    fn is_in_ram_or_mmap() -> bool {
+        TStorage::is_in_ram_or_mmap()
     }
 
     fn is_on_disk(&self) -> bool {
